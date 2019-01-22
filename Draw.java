@@ -9,18 +9,20 @@ import java.net.URL;
 public class Draw extends JComponent{
 
 	private BufferedImage image;
+	private BufferedImage background;
+	private URL backgroundimage = getClass().getResource("bg1.jpg");
 	private URL resource = getClass().getResource("run0.png");
 
 
-
 	// circle s positon
-	public int x = 30;
-	public int y = 30;
+	public int x = -10;
+	public int y = 470;
 
 	public int state = 0;
 
 	public Draw(){
 		try{
+			background = ImageIO.read(backgroundimage);
 			image = ImageIO.read(resource);
 		}
 		catch(IOException e){
@@ -69,12 +71,18 @@ public class Draw extends JComponent{
 		repaint();
 	}
 	public void moveDown(){
+		if(y > 470){
+			y = 470;
+		}
 		y=y + 5;
 		reloadImage();
 		repaint();
 		
 	}
 	public void moveLeft(){
+		if(x < 5){
+			x = 5;
+		}
 		x=x - 5;
 		reloadImage();
 		repaint();
@@ -88,9 +96,9 @@ public class Draw extends JComponent{
 	}
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.setColor(Color.MAGENTA);
-        g.fillOval(x,y,50,50);
+        g.drawImage(background, 0, 0, this);
         g.drawImage(image, x , y, this);
+        
 
 
 	}
