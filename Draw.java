@@ -93,9 +93,212 @@ public class Draw extends JComponent{
 		});
 		sword1.start();
 	}
+	public void atkAnimation(){
+		Thread atk1 = new Thread(new Runnable(){
+			public void run(){
+				for(int ctr = 0; ctr < 6; ctr++){
+					try {
+						if(ctr==4){
+							resource = getClass().getResource("run0.png");
+						}
+						else{
+							resource = getClass().getResource("atk"+ctr+".png");
+						}
+						
+						try{
+							image = ImageIO.read(resource);
+						}
+						catch(IOException e){
+							e.printStackTrace();
+						}
+				        repaint();
+				        Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		atk1.start();
+	}
+	public void swirlAtkAnimation(){
+		Thread swirlatk1 = new Thread(new Runnable(){
+			public void run(){
+				for(int ctr = 0; ctr < 6; ctr++){
+					try {
+						if(ctr==4){
+							resource = getClass().getResource("run0.png");
+						}
+						else{
+							resource = getClass().getResource("swirlatk"+ctr+".png");
+						}
+						
+						try{
+							image = ImageIO.read(resource);
+						}
+						catch(IOException e){
+							e.printStackTrace();
+						}
+				        repaint();
+				        Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		swirlatk1.start();
+	}
+	public void jumpAnimation(){
+		Thread jump1 = new Thread(new Runnable(){
+			public void run(){
+				for(int ctr = 0; ctr < 5; ctr++){
+					try {
+						if(ctr==4){
+							resource = getClass().getResource("run0.png");
+						}
+						else{
+							resource = getClass().getResource("jump"+ctr+".png");
+						}
+						
+						try{
+							image = ImageIO.read(resource);
+						}
+						catch(IOException e){
+							e.printStackTrace();
+						}
+				        repaint();
+				        Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		jump1.start();
+	}
+	public void slideAnimation(){
+		Thread slide1 = new Thread(new Runnable(){
+			public void run(){
+				for(int ctr = 0; ctr < 6; ctr++){
+					try {
+						if(ctr==4){
+							resource = getClass().getResource("run0.png");
+						}
+						else{
+							resource = getClass().getResource("slide"+ctr+".png");
+						}
+						
+						try{
+							image = ImageIO.read(resource);
+						}
+						catch(IOException e){
+							e.printStackTrace();
+						}
+				        repaint();
+				        Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		slide1.start();
+	}
+	public void bowAnimation(){
+		Thread bow1 = new Thread(new Runnable(){
+			public void run(){
+				for(int ctr = 0; ctr < 9; ctr++){
+					try {
+						if(ctr==4){
+							resource = getClass().getResource("run0.png");
+						}
+						else{
+							resource = getClass().getResource("bow"+ctr+".png");
+						}
+						
+						try{
+							image = ImageIO.read(resource);
+						}
+						catch(IOException e){
+							e.printStackTrace();
+						}
+				        repaint();
+				        Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		bow1.start();
+	}
+	public void smrsltAnimation(){
+		Thread smrslt1 = new Thread(new Runnable(){
+			public void run(){
+				for(int ctr = 0; ctr < 5; ctr++){
+					try {
+						if(ctr==4){
+							resource = getClass().getResource("run0.png");
+						}
+						else{
+							resource = getClass().getResource("smrslt"+ctr+".png");
+						}
+						
+						try{
+							image = ImageIO.read(resource);
+						}
+						catch(IOException e){
+							e.printStackTrace();
+						}
+				        repaint();
+				        Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		smrslt1.start();
+	}
+	public void swirlatk(){
+		swirlAtkAnimation();
+		reloadImage();
+		repaint();
+	}
+	public void smrslt(){
+		smrsltAnimation();
+		reloadImage();
+		repaint();
+	}
+	public void atk(){
+		atkAnimation();
+		reloadImage();
+		repaint();
+	}
+	public void bow(){
+		bowAnimation();	
+		reloadImage();
+		repaint();
+	}
+	public void slide(){
+		slideAnimation();
+		x = x + 20;
+		reloadImage();
+		repaint();
+	}
+
+	public void jump(){
+		y = y - 20;
+		jumpAnimation();
+		reloadImage();
+		repaint();
+	}
 
 	public void attack(){
 		swordAttackAnimation();
+		reloadImage();
+		repaint();
 	}
 
 	public void moveUp(){

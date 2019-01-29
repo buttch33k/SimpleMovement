@@ -12,25 +12,49 @@ public class MyFrame extends JFrame implements KeyListener{
 
 	public void keyPressed(KeyEvent e){
 		
-		if(e.getKeyCode() == KeyEvent.VK_UP){
+		if(e.getKeyCode() == KeyEvent.VK_W){
 			drawing.moveUp();
 			System.out.println("pos: " + drawing.x + "," + drawing.y);
 		}
-		else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+		else if(e.getKeyCode() == KeyEvent.VK_S){
 			drawing.moveDown();
 			System.out.println("pos: " + drawing.x + "," + drawing.y);
 		}
-		else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+		else if(e.getKeyCode() == KeyEvent.VK_D){
 			drawing.moveRight();
 			System.out.println("pos: " + drawing.x + "," + drawing.y);
 		}
-		else if(e.getKeyCode() == KeyEvent.VK_LEFT){
+		else if(e.getKeyCode() == KeyEvent.VK_A){
 			drawing.moveLeft();
 			System.out.println("pos: " + drawing.x + "," + drawing.y);
 		}
-		else if(e.getKeyCode() == KeyEvent.VK_SPACE){
+		else if(e.getKeyCode() == KeyEvent.VK_UP){
 			drawing.attack();
-			System.out.println("attack");
+			System.out.println("pos: " + drawing.x + "," + drawing.y);
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+			drawing.atk();
+			System.out.println("pos: " + drawing.x + "," + drawing.y);
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_LEFT){
+			drawing.swirlatk();
+			System.out.println("pos: " + drawing.x + "," + drawing.y);
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_SPACE){
+			drawing.jump();
+			System.out.println("pos: " + drawing.x + "," + drawing.y);
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_SHIFT){
+			drawing.slide();
+			System.out.println("pos: " + drawing.x + "," + drawing.y);
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+			drawing.bow();
+			System.out.println("pos: " + drawing.x + "," + drawing.y);
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_Q){
+			drawing.smrslt();
+			System.out.println("pos: " + drawing.x + "," + drawing.y);
 		}
 	}
 	public void keyReleased(KeyEvent e){
