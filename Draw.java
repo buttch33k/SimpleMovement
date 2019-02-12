@@ -133,6 +133,13 @@ public class Draw extends JComponent{
 						e.printStackTrace();
 					}
 				}
+				for(int x=0; x<monsters.length; x++){
+					if(monsters[x]!=null){
+						if(monsters[x].contact){
+							monsters[x].life = monsters[x].life - 10;
+						}
+					}
+				}
 			}
 		});
 		sword1.start();
@@ -161,6 +168,13 @@ public class Draw extends JComponent{
 						e.printStackTrace();
 					}
 				}
+				for(int x=0; x<monsters.length; x++){
+					if(monsters[x]!=null){
+						if(monsters[x].contact){
+							monsters[x].life = monsters[x].life - 10;
+						}
+					}
+				}
 			}
 		});
 		atk1.start();
@@ -187,6 +201,13 @@ public class Draw extends JComponent{
 				        Thread.sleep(100);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
+					}
+				}
+				for(int x=0; x<monsters.length; x++){
+					if(monsters[x]!=null){
+						if(monsters[x].contact){
+							monsters[x].life = monsters[x].life - 10;
+						}
 					}
 				}
 			}
@@ -273,6 +294,13 @@ public class Draw extends JComponent{
 						e.printStackTrace();
 					}
 				}
+				for(int x=0; x<monsters.length; x++){
+					if(monsters[x]!=null){
+						if(monsters[x].contact){
+							monsters[x].life = monsters[x].life - 10;
+						}
+					}
+				}
 			}
 		});
 		bow1.start();
@@ -349,6 +377,7 @@ public class Draw extends JComponent{
 		y=y - 5;
 		reloadImage();
 		repaint();
+		checkCollision();
 	}
 	public void moveDown(){
 		if(y > 470){
@@ -357,6 +386,7 @@ public class Draw extends JComponent{
 		y=y + 5;
 		reloadImage();
 		repaint();
+		checkCollision();
 		
 	}
 	public void moveLeft(){
@@ -366,14 +396,56 @@ public class Draw extends JComponent{
 		x=x - 5;
 		reloadImage();
 		repaint();
+		checkCollision();
 		
 	}
 	public void moveRight(){
 		x=x + 5;
 		reloadImage();
 		repaint();
-		
+		checkCollision();
 	}
+	public void checkCollision(){
+		int xChecker = x + width;
+		int yChecker = y;
+
+		for(int x=0; x<monsters.length; x++){
+			boolean collideX = false;
+			boolean collideY = false;
+
+			if(monsters[x]!=null){
+				monsters[x].contact = false;
+
+				if(yChecker > monsters[x].yPos){
+					if(yChecker-monsters[x].yPos < monsters[x].height){
+						collideY = true;
+					}
+				}
+				else{
+					if(monsters[x].yPos - yChecker < monsters[x].height){
+						collideY = true;
+					}
+				}
+
+				if(xChecker > monsters[x].xPos){
+					if(xChecker-monsters[x].xPos < monsters[x].width){
+						collideX = true;
+					}
+				}
+				else{
+					if(monsters[x].xPos - xChecker < 5){
+						collideX = true;
+					}
+				}
+			}
+
+			if(collideX && collideY){
+				System.out.println("collision!");
+				monsters[x].contact = true;
+			}
+		}
+	}
+	
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         g.drawImage(backgroundImage, 0, 0, this);
