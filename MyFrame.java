@@ -56,6 +56,9 @@ public class MyFrame extends JFrame implements KeyListener{
 			drawing.smrslt();
 			System.out.println("pos: " + drawing.x + "," + drawing.y);
 		}
+		else if(e.getKeyCode() == KeyEvent.VK_P){
+			drawing.spawnEnemy();
+		}
 	}
 	public void keyReleased(KeyEvent e){
 

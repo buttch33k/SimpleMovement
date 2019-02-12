@@ -1,60 +1,104 @@
 import javax.swing.JComponent;
+import javax.swing.Timer;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.net.URL;
-import javax.swing.Timer;
+import java.util.Random;
+
 
 public class Draw extends JComponent{
 
 	private BufferedImage image;
-	private BufferedImage background;
-	private URL backgroundimage = getClass().getResource("bg1.jpg");
-	private URL resource = getClass().getResource("run0.png");
+	private BufferedImage backgroundImage;
+	public URL resource = getClass().getResource("character/run0.png");
 
 
 	// circle s positon
 	public int x = -10;
 	public int y = 470;
+	public int height = 0;
+	public int width = 0;
 
 	public int state = 0;
 
+	public Random randomizer;
+
+	public int enemyCount;
+	Monster[] monsters = new Monster[20];
+
 	public Draw(){
+		randomizer = new Random();
+		spawnEnemy();
+
 		try{
-			background = ImageIO.read(backgroundimage);
 			image = ImageIO.read(resource);
+			backgroundImage = ImageIO.read(getClass().getResource("bg1.jpg"));
 		}
 		catch(IOException e){
 			e.printStackTrace();
 		}
+		height = image.getHeight();
+		width = image.getWidth();
+
+		startGame();
 	}
+
+	public void startGame(){
+		Thread gameThread = new Thread(new Runnable(){
+			public void run(){
+				while(true){
+					try{
+						for(int c = 0; c < monsters.length; c++){
+							if(monsters[c]!=null){
+								monsters[c].moveTo(x,y);
+								repaint();
+							}
+						}
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+							e.printStackTrace();
+					}
+				}
+			}
+		});
+		gameThread.start();
+	}
+
+	public void spawnEnemy(){
+		if(enemyCount < 10){
+			monsters[enemyCount] = new Monster(randomizer.nextInt(500), randomizer.nextInt(500), this);
+			enemyCount++;
+		}
+	}
+
 	public void reloadImage(){
 		state++;
 
         if (state == 0){
-            resource = getClass().getResource("run0.png");
+            resource = getClass().getResource("character/run0.png");
         }
 
         else if (state == 1){
-            resource = getClass().getResource("run1.png");
+            resource = getClass().getResource("character/run1.png");
         }
 
         else if (state == 2){
-            resource = getClass().getResource("run2.png");
+            resource = getClass().getResource("character/run2.png");
         }
 
         else if (state == 3){
-            resource = getClass().getResource("run3.png");
+            resource = getClass().getResource("character/run3.png");
         }
         
         else if (state == 4){
-            resource = getClass().getResource("run4.png");
+            resource = getClass().getResource("character/run4.png");
         }
 
         else if (state == 5){
-            resource = getClass().getResource("run5.png");
+            resource = getClass().getResource("character/run5.png");
             state = 0;
         }
 
@@ -71,10 +115,10 @@ public class Draw extends JComponent{
 				for(int ctr = 0; ctr < 5; ctr++){
 					try {
 						if(ctr==4){
-							resource = getClass().getResource("run0.png");
+							resource = getClass().getResource("character/run0.png");
 						}
 						else{
-							resource = getClass().getResource("attack"+ctr+".png");
+							resource = getClass().getResource("character/attack"+ctr+".png");
 						}
 						
 						try{
@@ -99,10 +143,10 @@ public class Draw extends JComponent{
 				for(int ctr = 0; ctr < 6; ctr++){
 					try {
 						if(ctr==4){
-							resource = getClass().getResource("run0.png");
+							resource = getClass().getResource("character/run0.png");
 						}
 						else{
-							resource = getClass().getResource("atk"+ctr+".png");
+							resource = getClass().getResource("character/atk"+ctr+".png");
 						}
 						
 						try{
@@ -127,10 +171,10 @@ public class Draw extends JComponent{
 				for(int ctr = 0; ctr < 6; ctr++){
 					try {
 						if(ctr==4){
-							resource = getClass().getResource("run0.png");
+							resource = getClass().getResource("character/run0.png");
 						}
 						else{
-							resource = getClass().getResource("swirlatk"+ctr+".png");
+							resource = getClass().getResource("character/swirlatk"+ctr+".png");
 						}
 						
 						try{
@@ -155,10 +199,10 @@ public class Draw extends JComponent{
 				for(int ctr = 0; ctr < 5; ctr++){
 					try {
 						if(ctr==4){
-							resource = getClass().getResource("run0.png");
+							resource = getClass().getResource("character/run0.png");
 						}
 						else{
-							resource = getClass().getResource("jump"+ctr+".png");
+							resource = getClass().getResource("character/jump"+ctr+".png");
 						}
 						
 						try{
@@ -183,10 +227,10 @@ public class Draw extends JComponent{
 				for(int ctr = 0; ctr < 6; ctr++){
 					try {
 						if(ctr==4){
-							resource = getClass().getResource("run0.png");
+							resource = getClass().getResource("character/run0.png");
 						}
 						else{
-							resource = getClass().getResource("slide"+ctr+".png");
+							resource = getClass().getResource("character/slide"+ctr+".png");
 						}
 						
 						try{
@@ -211,10 +255,10 @@ public class Draw extends JComponent{
 				for(int ctr = 0; ctr < 9; ctr++){
 					try {
 						if(ctr==4){
-							resource = getClass().getResource("run0.png");
+							resource = getClass().getResource("character/run0.png");
 						}
 						else{
-							resource = getClass().getResource("bow"+ctr+".png");
+							resource = getClass().getResource("character/bow"+ctr+".png");
 						}
 						
 						try{
@@ -239,10 +283,10 @@ public class Draw extends JComponent{
 				for(int ctr = 0; ctr < 5; ctr++){
 					try {
 						if(ctr==4){
-							resource = getClass().getResource("run0.png");
+							resource = getClass().getResource("character/run0.png");
 						}
 						else{
-							resource = getClass().getResource("smrslt"+ctr+".png");
+							resource = getClass().getResource("character/smrslt"+ctr+".png");
 						}
 						
 						try{
@@ -332,10 +376,20 @@ public class Draw extends JComponent{
 	}
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(background, 0, 0, this);
+        g.drawImage(backgroundImage, 0, 0, this);
         g.drawImage(image, x , y, this);
+
+        g.drawImage(image, x, y, this);
         
-
-
+        for(int c = 0; c < monsters.length; c++){
+			if(monsters[c]!=null){
+				// character grid for monsters
+				// g.setColor(Color.BLUE);
+				// g.fillRect(monsters[c].xPos, monsters[c].yPos+5, monsters[c].width, monsters[c].height);
+				g.drawImage(monsters[c].image, monsters[c].xPos, monsters[c].yPos, this);
+				g.setColor(Color.GREEN);
+				g.fillRect(monsters[c].xPos+7, monsters[c].yPos, monsters[c].life, 2);
+			}
+		}
 	}
 }
