@@ -5,20 +5,21 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import javax.swing.JComponent;
+import java.awt.Rectangle;
 
 public class Monster{
 	
-	public int xPos = 150;
-	public int yPos = 300;
+	public int xPos = 0;
+	public int yPos = 0;
 	public int width = 0;
 	public int height = 0;
-	public int life = 20;
+	public int life = 40;
 	public boolean idle = true;
 	public boolean alive = true;
 	public boolean contact = false;
 
 	public BufferedImage image;
-	public URL resource = getClass().getResource("slime/idle0.png");
+	public URL resource = getClass().getResource("alien/alien0.png");
 
 	public Monster(Draw comp){
 		try{
@@ -47,6 +48,11 @@ public class Monster{
 
 		animate(comp);
 	}
+	public Rectangle monsterBounds(){
+		return(new Rectangle (xPos, yPos, width, height));
+
+	}
+
 
 	public void animate(Draw compPass){
 		Thread monThread = new Thread(new Runnable(){
@@ -55,10 +61,10 @@ public class Monster{
 					for(int ctr = 0; ctr < 5; ctr++){
 						try {
 							if(ctr==4){
-								resource = getClass().getResource("slime/idle0.png");
+								resource = getClass().getResource("alien/alien0.png");
 							}
 							else{
-								resource = getClass().getResource("slime/idle"+ctr+".png");
+								resource = getClass().getResource("alien/alien"+ctr+".png");
 							}
 							
 							try{
@@ -85,19 +91,7 @@ public class Monster{
 	}
 
 	public void moveTo(int toX, int toY){
-		if(xPos<toX){
-			xPos++;
-		}
-		else if(xPos>toX){
-			xPos--;
-		}
-
-		if(yPos<toY){
-			yPos++;
-		}
-		else if(yPos>toY){
-			yPos--;
-		}
+		
 	}
 
 	public void die(Draw compPass){
@@ -105,9 +99,9 @@ public class Monster{
 		if(alive){
 			Thread monThread = new Thread(new Runnable(){
 				public void run(){
-					for(int ctr = 0; ctr < 4; ctr++){
+					for(int ctr = 0; ctr < 6; ctr++){
 						try {					
-							resource = getClass().getResource("slime/die"+ctr+".png");
+							resource = getClass().getResource("boom/explosion"+ctr+".png");
 							
 							try{
 								image = ImageIO.read(resource);

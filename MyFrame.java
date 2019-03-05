@@ -12,50 +12,27 @@ public class MyFrame extends JFrame implements KeyListener{
 
 	public void keyPressed(KeyEvent e){
 		
-		if(e.getKeyCode() == KeyEvent.VK_W){
-			drawing.moveUp();
-			System.out.println("pos: " + drawing.x + "," + drawing.y);
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_S){
-			drawing.moveDown();
-			System.out.println("pos: " + drawing.x + "," + drawing.y);
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_D){
-			drawing.moveRight();
-			System.out.println("pos: " + drawing.x + "," + drawing.y);
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_A){
-			drawing.moveLeft();
-			System.out.println("pos: " + drawing.x + "," + drawing.y);
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_UP){
-			drawing.attack();
-			System.out.println("pos: " + drawing.x + "," + drawing.y);
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-			drawing.atk();
-			System.out.println("pos: " + drawing.x + "," + drawing.y);
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_LEFT){
-			drawing.swirlatk();
-			System.out.println("pos: " + drawing.x + "," + drawing.y);
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_SPACE){
-			drawing.jump();
-			System.out.println("pos: " + drawing.x + "," + drawing.y);
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_SHIFT){
-			drawing.slide();
-			System.out.println("pos: " + drawing.x + "," + drawing.y);
+		if(e.getKeyCode() == KeyEvent.VK_UP){
+			drawing.spaceShip.moveUp();
+			System.out.println("pos: " + drawing.spaceShip.x + "," + drawing.spaceShip.y);
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_DOWN){
-			drawing.bow();
-			System.out.println("pos: " + drawing.x + "," + drawing.y);
+			drawing.spaceShip.moveDown();
+			System.out.println("pos: " + drawing.spaceShip.x + "," + drawing.spaceShip.y);
 		}
-		else if(e.getKeyCode() == KeyEvent.VK_Q){
-			drawing.smrslt();
-			System.out.println("pos: " + drawing.x + "," + drawing.y);
+		else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+			drawing.spaceShip.moveRight();
+			System.out.println("pos: " + drawing.spaceShip.x + "," + drawing.spaceShip.y);
 		}
+		else if(e.getKeyCode() == KeyEvent.VK_LEFT){
+			drawing.spaceShip.moveLeft();
+			System.out.println("pos: " + drawing.spaceShip.x + "," + drawing.spaceShip.y);
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_SPACE){
+			drawing.spaceShip.attack();
+			System.out.println("pos: " + drawing.spaceShip.x + "," + drawing.spaceShip.y);
+		}
+			
 		else if(e.getKeyCode() == KeyEvent.VK_P){
 			drawing.spawnEnemy();
 		}
@@ -71,7 +48,7 @@ public class MyFrame extends JFrame implements KeyListener{
     public static void main(String args []){
     MyFrame gameFrame = new MyFrame();
     
-    gameFrame.setSize(900,550);
+    gameFrame.setSize(1067,600);
     gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     gameFrame.setVisible(true);
     gameFrame.setResizable(false);
